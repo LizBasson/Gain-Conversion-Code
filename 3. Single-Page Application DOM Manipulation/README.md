@@ -8,7 +8,7 @@
 1. Update h1 text, Add value proposition, Update the button text from “Request a demo” to “Contact us”, Overwrite “Why Liftmap?” link
 
 ## How to Run
-1. Go to https://conversion.com/contact/.
+1. Go to https://liftmap.com/.
 2. Paste `script.js` into the console.
 3. Inject `style.css` using the snippet below.
 
