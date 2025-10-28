@@ -1,7 +1,3 @@
-// Remove original form
-const form = document.querySelector('.contact-form__form.kam-world');
-if (form) form.innerHTML = '';
-
 // Create glass section
 const glassSection = document.createElement('section');
 glassSection.className = 'glass-section';
@@ -13,67 +9,116 @@ glassSection.innerHTML = `
 document.querySelector('.contact-form__form.kam-world')?.appendChild(glassSection);
 
 // Create modal container
-const modal = document.createElement('div');
-modal.className = 'modal hidden';
-modal.innerHTML = `
-  <div class="modal-content">
-    <div class="progress-bar">
-      <div class="step active" data-step="1">1</div>
-      <div class="step" data-step="2">2</div>
-      <div class="step" data-step="3">3</div>
-    </div>
-    <form id="multiStepForm">
-      <div class="form-step step-1">
-        <input type="text" placeholder="First Name" required />
-        <input type="text" placeholder="Last Name" required />
-        <input type="email" placeholder="Email" required />
-        <button type="button" class="next">Next</button>
-      </div>
-      <div class="form-step step-2 hidden">
-        <textarea placeholder="How can we help you?" required></textarea>
-        <label><input type="checkbox" required /> I agree to terms</label>
-        <button type="button" class="prev">Back</button>
-        <button type="submit">Submit</button>
-      </div>
-      <div class="form-step step-3 hidden">
-        <p>Thank you! We’ll be in touch soon.</p>
-        <button type="button" class="prev">Back</button>
-      </div>
-    </form>
+const form = document.querySelector('.hbspt-form');
+
+if (form) {
+  // Create modal wrapper
+  const modal = document.createElement('div');
+  modal.id = 'customModal';
+  modal.className = 'modal hidden';
+
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+
+  const closeButton = document.createElement('span');
+  closeButton.className = 'close-button';
+  closeButton.innerHTML = '&times;';
+
+
+
+  // Move form into modal content
+  form.parentNode.insertBefore(modal, form); // Insert modal before form
+  modalContent.appendChild(closeButton);
+  modalContent.appendChild(form); // Move form inside modal content
+  modal.appendChild(modalContent);
+
+
+
+  // Progress Section
+  const progressSect = document.createElement('div');
+  progressSect.className = 'progress-container';
+  progressSect.innerHTML = `
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+    <div class="step active"><div>1</div> <p>User Information</p></div>
+    <div class="step"><div>2</div><p>Inquiry</p></div>
+    <div class="step"><div>3</div><p>Complete</p></div>
   </div>
-`;
-document.body.appendChild(modal);
 
-// Modal logic
-document.getElementById('openModal').onclick = () => modal.classList.remove('hidden');
-const steps = modal.querySelectorAll('.form-step');
-const progress = modal.querySelectorAll('.step');
-let currentStep = 0;
+  <div class="step-content">
+    <div class="content active" id="content-1">
+      <p>Enter your name, email, and contact details.</p>
+    </div>
+    <div class="content" id="content-2">
+      <p>Select your preferences and interests.</p>
+    </div>
+    <div class="content" id="content-3">
+      <p>Thank you for your submission.</p>
+    </div>
+  </div>
 
-function updateStep(index) {
-    steps.forEach((s, i) => s.classList.toggle('hidden', i !== index));
-    progress.forEach((p, i) => {
-        p.className = 'step';
-        if (i < index) p.classList.add('complete');
-        if (i === index) p.classList.add('active');
+  <div class="buttons">
+    <button id="back" disabled>Back</button>
+    <button id="next">Next</button>
+  </div>
+  `;
+
+  document.querySelector('.modal-content')?.insertBefore(progressSect, form);
+
+  const progress = document.getElementById('progress');
+  const steps = document.querySelectorAll('.step');
+  const contents = document.querySelectorAll('.content');
+  const nextBtn = document.getElementById('next');
+  const backBtn = document.getElementById('back');
+
+  let currentStep = 1;
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < steps.length) {
+      currentStep++;
+      updateUI();
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateUI();
+    }
+  });
+
+  function updateUI() {
+    steps.forEach((step, index) => {
+      step.classList.toggle('active', index < currentStep);
     });
-    currentStep = index;
+
+    progress.style.width = `${(currentStep - 1) / (steps.length - 1) * 100}%`;
+
+    contents.forEach((content, index) => {
+      content.classList.toggle('active', index === currentStep - 1);
+    });
+
+    backBtn.disabled = currentStep === 1;
+    nextBtn.disabled = currentStep === steps.length;
+  }
+
+
+
+
+
+  document.getElementById('openModal')?.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  // Close modal on button click
+  closeButton.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+
+
+
 }
 
-modal.querySelectorAll('.next').forEach(btn => {
-    btn.onclick = () => {
-        const inputs = steps[currentStep].querySelectorAll('input, textarea');
-        const valid = [...inputs].every(i => i.checkValidity());
-        if (valid) updateStep(currentStep + 1);
-        else alert('Please complete all fields.');
-    };
-});
 
-modal.querySelectorAll('.prev').forEach(btn => {
-    btn.onclick = () => updateStep(currentStep - 1);
-});
 
-modal.querySelector('form').onsubmit = e => {
-    e.preventDefault();
-    updateStep(2);
-};
