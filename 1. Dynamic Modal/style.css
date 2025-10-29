@@ -1,4 +1,8 @@
-:root {}
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --green-color: #396227;
+}
 
 button:focus,
 input:focus,
@@ -31,10 +35,12 @@ textarea {
     background: rgba(242, 242, 242, 0.5);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    color: #000;
+    color: var(--black-color);
     text-align: left;
     animation: slideInLeft 0.8s ease-out;
     transition: background 0.4s ease;
+    position: relative;
+    z-index: 99999;
 }
 
 .glass-section:hover,
@@ -71,14 +77,14 @@ textarea {
     text-align: center;
     text-decoration: none;
     text-align: center;
-    text-shadow: #396227 0 .1em 0;
-    color: #fff;
+    text-shadow: var(--green-color) 0 .1em 0;
+    color: var(--white-color);
     background-color: #508336;
     position: relative;
     border-radius: .1rem;
     cursor: pointer;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--white-color);
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
@@ -94,8 +100,8 @@ textarea {
     height: 100%;
     background-color: #67A346;
     z-index: -1;
-    border-left: 4px solid #396227;
-    border-right: 4px solid #396227;
+    border-left: 4px solid var(--green-color);
+    border-right: 4px solid var(--green-color);
     outline: 2px solid #262423;
 }
 
@@ -106,7 +112,7 @@ textarea {
     left: 0px;
     width: 100%;
     height: 122%;
-    background-image: linear-gradient(#67A346, #598F3C, #396227, #2A3323);
+    background-image: linear-gradient(#67A346, #598F3C, var(--green-color), #2A3323);
     z-index: -1;
     border: 2px solid #3B6528;
 }
@@ -152,18 +158,18 @@ textarea {
 }
 
 .glass-section button:active {
-    background-color: #396227;
+    background-color: var(--green-color);
 }
 
 .glass-section button:active::before {
-    border-left: 4px solid #396227;
-    border-right: 4px solid #396227;
+    border-left: 4px solid var(--green-color);
+    border-right: 4px solid var(--green-color);
     outline: 2px solid #262423;
-    background-color: #396227;
+    background-color: var(--green-color);
 }
 
 .glass-section button:active::after {
-    background-image: linear-gradient(#396227, #396227, #396227, #396227);
+    background-image: linear-gradient(var(--green-color), var(--green-color), var(--green-color), var(--green-color));
     border: 2px solid #262423;
 }
 
@@ -181,7 +187,7 @@ textarea {
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.5s ease-out;
-    z-index: 1;
+    z-index: 999999;
 }
 
 .modal.hidden {
@@ -189,12 +195,19 @@ textarea {
 }
 
 .modal-content {
-    background: #fff;
+    background: var(--white-color);
     padding: 2rem;
     border-radius: 10px;
     width: 90%;
     max-width: 500px;
     animation: slideUp 0.5s ease-out;
+}
+
+.modal-content .close-button {
+    font-size: 28px;
+    line-height: 0;
+    float: right;
+    cursor: pointer;
 }
 
 .modal.fade-out {
@@ -266,15 +279,7 @@ textarea {
     display: block;
 }
 
-@keyframes fade {
-    from {
-        opacity: 0;
-    }
 
-    to {
-        opacity: 1;
-    }
-}
 
 .buttons button {
     padding: 8px 16px;
@@ -283,6 +288,28 @@ textarea {
 }
 
 
+
+form fieldset,
+form .hs_recaptcha,
+form .hs_submit,
+.thank-you-message {
+    display: none !important;
+    animation: fade 0.3s ease-in-out;
+}
+
+form fieldset.active,
+form .hs_recaptcha.active,
+form .hs_submit.active,
+.thank-you-message.active {
+    display: block !important;
+}
+
+.thank-you-message h2 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
 
 
 .hidden {
@@ -326,6 +353,16 @@ button {
     }
 }
 
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 
 @keyframes slideUp {
     from {
@@ -354,6 +391,12 @@ button {
 
 /* Responsive */
 @media only screen and (min-width: 768px) {
+
+    .thank-you-message h2 {
+        font-size: 2.25rem;
+        line-height: 2.75rem;
+    }
+
     .glass-section h2 {
         font-size: 3.125rem;
         line-height: 3.75rem;
@@ -382,5 +425,15 @@ button {
 
     .glass-section p {
         font-size: 0.9rem;
+    }
+
+    .progress-bar {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .progress {
+        display: none;
     }
 }
