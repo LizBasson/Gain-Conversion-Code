@@ -2,13 +2,9 @@
     --white-color: #fff;
     --black-color: #000;
     --green-color: #396227;
-}
-
-button:focus,
-input:focus,
-textarea:focus {
-    outline: 2px solid #00bcd4;
-    outline-offset: 2px;
+    --green-color-light: #508336;
+    --green-color-lighter: #67A346;
+    --light-black-color: #2c2d2c;
 }
 
 input,
@@ -79,12 +75,11 @@ textarea {
     text-align: center;
     text-shadow: var(--green-color) 0 .1em 0;
     color: var(--white-color);
-    background-color: #508336;
+    background-color: var(--green-color-light);
     position: relative;
     border-radius: .1rem;
     cursor: pointer;
     text-transform: uppercase;
-    color: var(--white-color);
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
@@ -98,7 +93,7 @@ textarea {
     left: -.175em;
     width: 105%;
     height: 100%;
-    background-color: #67A346;
+    background-color: var(--green-color-lighter);
     z-index: -1;
     border-left: 4px solid var(--green-color);
     border-right: 4px solid var(--green-color);
@@ -112,9 +107,9 @@ textarea {
     left: 0px;
     width: 100%;
     height: 122%;
-    background-image: linear-gradient(#67A346, #598F3C, var(--green-color), #2A3323);
+    background-image: linear-gradient(var(--green-color-lighter), #598F3C, var(--green-color), #2A3323);
     z-index: -1;
-    border: 2px solid #3B6528;
+    border: 2px solid #262423;
 }
 
 .glass-section button:hover {
@@ -253,8 +248,8 @@ textarea {
 }
 
 .step.active div {
-    background: #2c2d2c;
-    color: white;
+    background: var(--light-black-color);
+    color: var(--white-color);
     margin: auto;
 }
 
@@ -263,7 +258,7 @@ textarea {
     top: 20%;
     left: 10%;
     height: 4px;
-    background: #2c2d2c;
+    background: var(--light-black-color);
     z-index: 0;
     transform: translateY(-50%);
     transition: width 0.3s ease;
@@ -327,8 +322,8 @@ button {
     padding: 0.75rem;
     border: none;
     border-radius: 5px;
-    background: #2c2d2c;
-    color: white;
+    background: var(--light-black-color);
+    color: var(--white-color);
     cursor: pointer;
 }
 

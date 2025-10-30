@@ -5,7 +5,7 @@
 2. Make sure that everything fits nicely on all viewports: desktop, tablet and mobile (as small as 375px)
 
 ## Objective
-1. Replace the form with a section containing header, paragraph and a button
+1. Replace the form with a section containing headering, paragraph and a button
 
 ## How to Run
 1. Go to https://conversion.com/contact/.
