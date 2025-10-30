@@ -48,7 +48,7 @@
         if (videobtn) {
             videobtn.remove();
         }
-
+        // Add "Why Liftmap?" button in hero section
         const buttonsContainer = document.querySelector('.lm-hero__buttons');
         if (buttonsContainer && !buttonsContainer.querySelector('.btn-lift-link')) {
             const button = document.createElement('button');
@@ -70,25 +70,6 @@
 
 
     }
-
-    // const buttonsContainer = document.querySelector('.lm-hero__buttons');
-    // if (buttonsContainer) {
-    //     const button = document.createElement('button');
-    //     button.className = 'btn btn-lift-link';
-    //     button.textContent = 'Why Liftmap?';
-    //     button.style.cursor = 'pointer';
-
-    //     button.addEventListener('click', () => {
-    //         const targetSection = document.querySelector('#whyLiftmap');
-    //         if (targetSection) {
-    //             targetSection.scrollIntoView({ behavior: 'smooth' });
-    //         } else {
-    //             window.location.hash = '#whyLiftmap';
-    //         }
-    //     });
-
-    //     buttonsContainer.appendChild(button);
-    // }
 
     // Observe SPA route changes
     const observer = new MutationObserver(() => {

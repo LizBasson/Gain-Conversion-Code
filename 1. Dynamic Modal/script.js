@@ -37,10 +37,6 @@ if (fieldsets.length > 1) {
   fieldsets[1].classList.add('active');
 }
 
-
-
-
-
 if (form) {
   // Create modal wrapper
   const modal = document.createElement('div');
@@ -53,8 +49,6 @@ if (form) {
   const closeButton = document.createElement('span');
   closeButton.className = 'close-button';
   closeButton.innerHTML = '&times;';
-
-
 
   // Move form into modal content
   form.parentNode.insertBefore(modal, form); // Insert modal before form
@@ -125,9 +119,6 @@ if (form) {
 
     progress.style.width = `${(currentStep - 1) / (steps.length - 1) * 100}%`;
 
-
-
-
     fieldsets.forEach((fs, index) => {
       fs.classList.remove('active');
     });
@@ -165,21 +156,13 @@ if (form) {
       form.querySelector('.thank-you-message')?.classList.remove('active');
     }
 
-
-
-
     backBtn.disabled = currentStep === 1;
   }
-
-
-
+  // Assign IDs to fieldsets
   fieldsets.forEach((fieldset, index) => {
     fieldset.id = `fieldset-${index + 1}`;
   });
-
-
-
-
+  // Open modal on button click
   document.getElementById('openModal')?.addEventListener('click', () => {
     modal.classList.remove('hidden');
   });
